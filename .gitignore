@@ -1,0 +1,18 @@
+# Secrets (NEVER UPLOAD THESE)
+.env
+
+# Python & System
+__pycache__/
+venv/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+
+# Large Data files (Optional: keep your csv if it's small, ignore if huge)
+# *.csv
+
+# Docker volumes (if any local folders were mapped)
+influxdb2_data/
+influxdb2_config/

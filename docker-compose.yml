@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  influxdb:
+    # Uses version 2.7 which includes the GUI (Data Explorer)
+    image: influxdb:2.7
+    container_name: airsense_db
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb2_data:/var/lib/influxdb2
+      - influxdb2_config:/etc/influxdb2
+    environment:
+      # --- AUTOMATIC CONFIGURATION ---
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      
+      # Username & Password for the web interface
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin_airsense
+      - DOCKER_INFLUXDB_INIT_PASSWORD=AirSense2025!
+      
+      # Organization and Bucket names
+      - DOCKER_INFLUXDB_INIT_ORG=AirSense_Team
+      - DOCKER_INFLUXDB_INIT_BUCKET=london_air_raw
+      
+      # THE SECRET ADMIN TOKEN
+      # This allows the Python script to connect immediately.
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=airsense-secret-token-2025
+
+volumes:
+  influxdb2_data:
+  influxdb2_config:
