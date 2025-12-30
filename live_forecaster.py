@@ -12,7 +12,7 @@ from influxdb_client.domain.write_precision import WritePrecision
 
 # InfluxDB and TensorFlow libraries
 from influxdb_client import InfluxDBClient, Point, WriteOptions
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 
 # ==============================================================================
 # ⚙️ CONFIGURATION & SETUP
@@ -69,6 +69,9 @@ def initialize_system():
 
         # Initialize InfluxDB Client
         logging.info("🔌 Connecting to InfluxDB...")
+        print("DEBUG influx url =", INFLUX_URL, type(INFLUX_URL))
+        print("DEBUG influx token =", "SET" if INFLUX_TOKEN else None, type(INFLUX_TOKEN))
+        print("DEBUG influx org =", ORG, type(ORG))
         client = InfluxDBClient(url=INFLUX_URL, token=INFLUX_TOKEN, org=ORG)
         write_api = client.write_api(write_options=WriteOptions(batch_size=1))
         
